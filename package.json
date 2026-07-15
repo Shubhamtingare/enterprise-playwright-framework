@@ -1,7 +1,7 @@
 {
   "name": "OrangeHRM-Automation",
   "version": "1.0.0",
-  "description": "Enterprise Playwright Automation Framework using TypeScript",
+  "description": "Enterprise Playwright Automation Framework for OrangeHRM using Playwright and TypeScript",
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
