@@ -9,7 +9,7 @@ export class BasePage {
   async navigate(url: string) {
     await this.page.goto(url);
   }
-  async getTitle() {
+  async getTitle(): Promise<string> {
     return await this.page.title();
   }
   async reload() {
