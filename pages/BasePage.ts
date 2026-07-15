@@ -21,7 +21,7 @@ export class BasePage {
   async goForward() {
     await this.page.goForward();
   }
-  async waitForLoadState() {
+  async waitForPageLoad() {
     await this.page.waitForLoadState("networkidle");
   }
 }
