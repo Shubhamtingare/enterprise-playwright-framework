@@ -1,5 +1,5 @@
 {
-  "name": "ecommerce",
+  "name": "OrangeHRM-Automation",
   "version": "1.0.0",
   "description": "Enterprise Playwright Automation Framework using TypeScript",
   "main": "index.js",

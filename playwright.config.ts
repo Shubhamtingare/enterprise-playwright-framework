@@ -9,7 +9,8 @@ export default defineConfig({
   workers: 2,
 
   use: {
-    baseURL: "https://www.saucedemo.com",
+    baseURL:
+      "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     trace: "on-first-retry",
