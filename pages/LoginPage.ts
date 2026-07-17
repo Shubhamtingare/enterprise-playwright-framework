@@ -10,8 +10,8 @@ export class LoginPage extends BasePage {
   private readonly loginButton;
   private readonly forgotPasswordLink;
 
-  async enterUsername() {}
-  async enterPassword() {}
+  async enterUsername(username: string): Promise<void> {}
+  async enterPassword(passowrd: string): Promise<void> {}
   async clickLogin() {}
   async clickForgotPassword() {}
 
