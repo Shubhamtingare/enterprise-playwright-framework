@@ -15,5 +15,5 @@ export class LoginPage extends BasePage {
   async clickLogin() {}
   async clickForgotPassword() {}
 
-  login(username: string, password: string) {}
+  async login(username: string, password: string): Promise<void> {}
 }
