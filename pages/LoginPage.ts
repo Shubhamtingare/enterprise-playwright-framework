@@ -2,9 +2,6 @@ import { Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class LoginPage extends BasePage {
-  constructor(page: Page) {
-    super(page);
-  }
   private readonly usernameInput = this.page.getByPlaceholder("Username");
   private readonly passwordInput = this.page.getByPlaceholder("Password");
   private readonly loginButton = this.page.getByRole("button", {
@@ -13,6 +10,10 @@ export class LoginPage extends BasePage {
   private readonly forgotPasswordLink = this.page.locator(
     ".orangehrm-login-forgot-header",
   );
+
+  constructor(page: Page) {
+    super(page);
+  }
 
   async enterUsername(username: string): Promise<void> {
     await this.usernameInput.fill(username);
