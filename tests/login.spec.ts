@@ -2,6 +2,10 @@ import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { LoginData } from "../data/LoginData";
 
+test.beforeEach("Navigate to correct URL", async ({ page }) => {
+  await page.goto("/");
+});
+
 test.describe("OrangeHRM Login", () => {
   test("Verify user can login with valid credentials", async ({ page }) => {
     //Arrange
@@ -13,7 +17,6 @@ test.describe("OrangeHRM Login", () => {
     const expectedText = "Dashboard";
 
     //Act
-    await page.goto("/");
     await loginPage.login(username, password);
 
     //Assert
