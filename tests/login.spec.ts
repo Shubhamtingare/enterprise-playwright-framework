@@ -22,7 +22,7 @@ test.describe("OrangeHRM Login", () => {
     await loginPage.login(username, password);
 
     //Assert
-    await expect(dashboardpage.verifyDashboardHeading()).toContainText(
+    await expect(dashboardpage.getDashboardHeading()).toContainText(
       expectedText,
     );
   });

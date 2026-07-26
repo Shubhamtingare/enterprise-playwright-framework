@@ -5,7 +5,7 @@ export class DashboardPage extends BasePage {
     ".oxd-topbar-header-breadcrumb-module",
   );
 
-  verifyDashboardHeading() {
+  getDashboardHeading() {
     return this.dashboardHeading;
   }
 }
