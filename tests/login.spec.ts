@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { LoginData } from "../data/LoginData";
+import { DashboardPage } from "../pages/DashboardPage";
 
 test.beforeEach("Navigate to correct URL", async ({ page }) => {
   await page.goto("/");
@@ -13,13 +14,16 @@ test.describe("OrangeHRM Login", () => {
     const username = LoginData.validUser.username;
     const password = LoginData.validUser.password;
     const loginPage = new LoginPage(page);
-    const dashboardText = page.locator(".oxd-topbar-header-breadcrumb-module");
+    const dashboardpage = new DashboardPage(page);
+    // const dashboardText = page.locator(".oxd-topbar-header-breadcrumb-module");
     const expectedText = "Dashboard";
 
     //Act
     await loginPage.login(username, password);
 
     //Assert
-    await expect(dashboardText).toContainText(expectedText);
+    await expect(dashboardpage.verifyDashboardHeading()).toContainText(
+      expectedText,
+    );
   });
 });
