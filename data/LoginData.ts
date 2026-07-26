@@ -11,8 +11,12 @@ export const LoginData = {
     username: "Admin",
     password: "admin12345",
   },
-  emptyCredentials: {
+  emptyUsername: {
     username: "",
+    password: "admin123",
+  },
+  emptyPassword: {
+    username: "Admin",
     password: "",
   },
 };
