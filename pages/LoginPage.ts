@@ -10,6 +10,13 @@ export class LoginPage extends BasePage {
   private readonly forgotPasswordLink = this.page.locator(
     ".orangehrm-login-forgot-header",
   );
+  private readonly loginError = this.page.locator(".oxd-alert-content--error");
+  private readonly usernameRequiredError = this.page
+    .locator(".oxd-input-field-error-message")
+    .nth(0);
+  private readonly passwordRequiredError = this.page
+    .locator(".oxd-input-field-error-message")
+    .nth(0);
 
   constructor(page: Page) {
     super(page);
@@ -33,6 +40,13 @@ export class LoginPage extends BasePage {
     await this.enterPassword(password);
     await this.clickLoginButton();
   }
+  getLoginErrorMsg() {
+    return this.loginError;
+  }
+  getUsernameReqErrMsg() {
+    return this.usernameRequiredError;
+  }
+  getPasswordReqErrMsg() {
+    return this.passwordRequiredError;
+  }
 }
-
-
