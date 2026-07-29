@@ -1,4 +1,5 @@
-import { test, expect } from "@playwright/test";
+import { test } from "../fixtures/baseFixture";
+import { expect } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { LoginData } from "../data/LoginData";
 import { DashboardPage } from "../pages/DashboardPage";
@@ -9,12 +10,14 @@ test.beforeEach("Navigate to correct URL", async ({ page }) => {
 
 test.describe("OrangeHRM Login", () => {
   test.describe("Positive scenarios", () => {
-    test("Verify user can login with valid credentials", async ({ page }) => {
+    test("Verify user can login with valid credentials", async ({
+      loginPage,
+      page,
+    }) => {
       //Arrange
 
       const username = LoginData.validUser.username;
       const password = LoginData.validUser.password;
-      const loginPage = new LoginPage(page);
       const dashboardpage = new DashboardPage(page);
 
       //Act
@@ -28,11 +31,12 @@ test.describe("OrangeHRM Login", () => {
   });
 
   test.describe("Negative scenarios", () => {
-    test("Verify user cannot login with invalid username", async ({ page }) => {
+    test("Verify user cannot login with invalid username", async ({
+      loginPage,
+    }) => {
       //Arrange
       const username = LoginData.invalidUser.username;
       const password = LoginData.invalidUser.password;
-      const loginPage = new LoginPage(page);
 
       //Act
       await loginPage.login(username, password);
@@ -43,11 +47,12 @@ test.describe("OrangeHRM Login", () => {
       );
     });
 
-    test("Verify user cannot login with invalid password", async ({ page }) => {
+    test("Verify user cannot login with invalid password", async ({
+      loginPage,
+    }) => {
       //Arrange
       const username = LoginData.invalidPassword.username;
       const password = LoginData.invalidPassword.password;
-      const loginPage = new LoginPage(page);
 
       //Act
       await loginPage.login(username, password);
@@ -58,11 +63,12 @@ test.describe("OrangeHRM Login", () => {
       );
     });
 
-    test("Verify user cannot login with empty username", async ({ page }) => {
+    test("Verify user cannot login with empty username", async ({
+      loginPage,
+    }) => {
       //Arrange
       const username = LoginData.emptyUsername.username;
       const password = LoginData.emptyUsername.password;
-      const loginPage = new LoginPage(page);
 
       //Act
       await loginPage.login(username, password);
@@ -71,13 +77,12 @@ test.describe("OrangeHRM Login", () => {
       await expect(loginPage.getUsernameReqErrMsg()).toContainText("Required");
     });
 
-    test.only("Verify user cannot login with empty password", async ({
-      page,
+    test("Verify user cannot login with empty password", async ({
+      loginPage,
     }) => {
       //Arrange
       const username = LoginData.emptyPassword.username;
       const password = LoginData.emptyPassword.password;
-      const loginPage = new LoginPage(page);
 
       //Act
       await loginPage.login(username, password);
