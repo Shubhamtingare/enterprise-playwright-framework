@@ -9,19 +9,10 @@ test.beforeEach("Navigate to correct URL", async ({ page }) => {
 test.describe("OrangeHRM Login", () => {
   test.describe("Positive scenarios", () => {
     test("Verify user can login with valid credentials", async ({
-      loginPage,
-      dashboardPage,
+      authenticatedDashboard,
     }) => {
-      //Arrange
-
-      const username = LoginData.validUser.username;
-      const password = LoginData.validUser.password;
-
-      //Act
-      await loginPage.login(username, password);
-
       //Assert
-      await expect(dashboardPage.getDashboardHeading()).toContainText(
+      await expect(authenticatedDashboard.getDashboardHeading()).toContainText(
         "Dashboard",
       );
     });
