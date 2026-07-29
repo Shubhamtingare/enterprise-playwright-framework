@@ -7,7 +7,7 @@ test.beforeEach("Navigate to correct URL", async ({ page }) => {
 });
 
 test.describe("OrangeHRM Login", () => {
-  test.describe("Positive scenarios", () => {
+  test.describe("Positive scenarios @smoke @regression", () => {
     test("Verify user can login with valid credentials", async ({
       authenticatedDashboard,
     }) => {
@@ -19,7 +19,7 @@ test.describe("OrangeHRM Login", () => {
   });
 
   test.describe("Negative scenarios", () => {
-    test("Verify user cannot login with invalid username", async ({
+    test("Verify user cannot login with invalid username @regression", async ({
       loginPage,
     }) => {
       //Arrange
@@ -35,7 +35,7 @@ test.describe("OrangeHRM Login", () => {
       );
     });
 
-    test("Verify user cannot login with invalid password", async ({
+    test("Verify user cannot login with invalid password @regression", async ({
       loginPage,
     }) => {
       //Arrange
@@ -51,7 +51,7 @@ test.describe("OrangeHRM Login", () => {
       );
     });
 
-    test("Verify user cannot login with empty username", async ({
+    test("Verify user cannot login with empty username @regression", async ({
       loginPage,
     }) => {
       //Arrange
@@ -65,7 +65,7 @@ test.describe("OrangeHRM Login", () => {
       await expect(loginPage.getUsernameReqErrMsg()).toContainText("Required");
     });
 
-    test("Verify user cannot login with empty password", async ({
+    test("Verify user cannot login with empty password @regression", async ({
       loginPage,
     }) => {
       //Arrange
