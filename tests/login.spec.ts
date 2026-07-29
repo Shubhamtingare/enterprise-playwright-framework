@@ -1,8 +1,6 @@
 import { test } from "../fixtures/baseFixture";
 import { expect } from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
 import { LoginData } from "../data/LoginData";
-import { DashboardPage } from "../pages/DashboardPage";
 
 test.beforeEach("Navigate to correct URL", async ({ page }) => {
   await page.goto("/");
@@ -12,19 +10,18 @@ test.describe("OrangeHRM Login", () => {
   test.describe("Positive scenarios", () => {
     test("Verify user can login with valid credentials", async ({
       loginPage,
-      page,
+      dashboardPage,
     }) => {
       //Arrange
 
       const username = LoginData.validUser.username;
       const password = LoginData.validUser.password;
-      const dashboardpage = new DashboardPage(page);
 
       //Act
       await loginPage.login(username, password);
 
       //Assert
-      await expect(dashboardpage.getDashboardHeading()).toContainText(
+      await expect(dashboardPage.getDashboardHeading()).toContainText(
         "Dashboard",
       );
     });
