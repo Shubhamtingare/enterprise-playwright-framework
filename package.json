@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "test:qa":"cross-env TEST_ENV=qa playwright test",
+    "test:uat":"cross-env TEST_ENV=uat playwright test",
+    "test-staging":"cross-env TEST_ENV=staging playwright test",
     "headed": "playwright test --headed",
     "ui": "playwright test --ui",
     "debug": "playwright test --debug",
