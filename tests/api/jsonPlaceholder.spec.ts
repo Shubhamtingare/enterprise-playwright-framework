@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { Logger } from "../../utils/Logger.ts";
+import { Logger } from "../../utils/Logger";
 
 test("Verify GET /users/1 returns valid user details", async ({ request }) => {
   const response = await request.get(
