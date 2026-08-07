@@ -1,8 +1,6 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-  testDir: "./tests",
-
   reporter: [["html"], ["list"]],
   timeout: 30000,
   retries: 1,
@@ -21,4 +19,20 @@ export default defineConfig({
     },
     headless: false,
   },
+
+  projects: [
+    { name: "setup", testMatch: "playwright/auth/auth.setup.ts" },
+    {
+      name: "ui",
+      testDir: "./tests/ui",
+      dependencies: ["setup"],
+      use: {
+        storageState: "playwright/auth/user.json",
+      },
+    },
+    {
+      name: "api",
+      testDir: "./tests/api",
+    },
+  ],
 });

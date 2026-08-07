@@ -1,6 +1,6 @@
-import { test } from "../fixtures/baseFixture";
+import { test } from "../../fixtures/baseFixture";
 import { expect } from "@playwright/test";
-import { LoginData } from "../data/LoginData";
+import { LoginData } from "../../data/LoginData";
 
 test.beforeEach("Navigate to correct URL", async ({ page }) => {
   await page.goto("/");
