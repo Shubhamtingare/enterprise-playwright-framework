@@ -21,13 +21,17 @@ export default defineConfig({
   },
 
   projects: [
-    { name: "setup", testMatch: "playwright/auth/auth.setup.ts" },
+    { name: "setup", testMatch: "auth/auth.setup.ts" },
+    {
+      name: "auth",
+      testDir: "./tests/auth",
+    },
     {
       name: "ui",
       testDir: "./tests/ui",
       dependencies: ["setup"],
       use: {
-        storageState: "playwright/auth/user.json",
+        storageState: "auth/user.json",
       },
     },
     {

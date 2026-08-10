@@ -10,6 +10,6 @@ dotenv.config({ path: path.resolve(__dirname, `.env.${testEnv}`) });
 
 export const env = {
   baseURL: process.env.BASE_URL,
-  username: process.env.USERNAME,
-  password: process.env.PASSWORD,
+  username: process.env.APP_USERNAME,
+  password: process.env.APP_PASSWORD,
 };
