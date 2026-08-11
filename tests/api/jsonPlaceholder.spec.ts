@@ -1,10 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
+import { env } from "../../config/env";
 
 test("Verify GET /users/1 returns valid user details", async ({ request }) => {
-  const response = await request.get(
-    "https://jsonplaceholder.typicode.com/users/1",
-  );
+  const response = await request.get(`${env.apiUrl}/users/1`);
 
   expect(response.status()).toBe(200);
 
@@ -18,9 +17,7 @@ test("Verify GET /users/1 returns valid user details", async ({ request }) => {
 });
 
 test("Verify user response structure", async ({ request }) => {
-  const response = await request.get(
-    "https://jsonplaceholder.typicode.com/users/1",
-  );
+  const response = await request.get(`${env.apiUrl}/users/1`);
 
   expect(response.status()).toBe(200);
 

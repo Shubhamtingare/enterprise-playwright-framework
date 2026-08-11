@@ -1,8 +1,9 @@
 import test, { expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
+import { env } from "../../config/env";
 
 test("Verify POST /users creates a new user", async ({ request }) => {
-  const appUrl = "https://jsonplaceholder.typicode.com/posts";
+  const appUrl = `${env.apiUrl}/posts`;
   const response = await request.post(appUrl, {
     data: {
       title: "Playwright",

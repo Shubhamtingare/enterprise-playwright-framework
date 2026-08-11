@@ -12,4 +12,5 @@ export const env = {
   baseURL: process.env.BASE_URL,
   username: process.env.APP_USERNAME,
   password: process.env.APP_PASSWORD,
+  apiUrl: process.env.API_URL,
 };
