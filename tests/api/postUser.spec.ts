@@ -1,16 +1,15 @@
 import test, { expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
-import { env } from "../../config/env";
+import { ApiClient } from "../../utils/ApiClient";
 
-test("Verify POST /users creates a new user", async ({ request }) => {
-  const appUrl = `${env.apiUrl}/posts`;
-  const response = await request.post(appUrl, {
-    data: {
-      title: "Playwright",
-      body: "Learning API Testing",
-      userId: 1,
-    },
-  });
+test("Verify POST /posts creates a new user", async ({ request }) => {
+  const apiClient = new ApiClient(request);
+  const data = {
+    title: "Playwright",
+    body: "Learning API Testing",
+    userId: 1,
+  };
+  const response = await apiClient.post("/posts", data);
 
   const jsonData = await response.json();
   Logger.info(JSON.stringify(jsonData, null, 2));

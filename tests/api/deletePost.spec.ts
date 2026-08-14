@@ -1,10 +1,12 @@
 import test, { expect } from "@playwright/test";
 import { env } from "../../config/env";
 import { Logger } from "../../utils/Logger";
+import { ApiClient } from "../../utils/ApiClient";
 
 test.describe("Delete Posts API", () => {
   test("Verify DELETE removes a post", async ({ request }) => {
-    const response = await request.delete(`${env.apiUrl}/posts/1`);
+    const apiClient = new ApiClient(request);
+    const response = await apiClient.delete("/posts/1");
 
     const jsonData = await response.json();
 
