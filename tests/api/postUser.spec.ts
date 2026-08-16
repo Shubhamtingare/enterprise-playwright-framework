@@ -9,7 +9,11 @@ test("Verify POST /posts creates a new user", async ({ request }) => {
     body: "Learning API Testing",
     userId: 1,
   };
-  const response = await apiClient.post("/posts", data);
+  const response = await apiClient.post("/posts", data, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
 
   const jsonData = await response.json();
   Logger.info(JSON.stringify(jsonData, null, 2));

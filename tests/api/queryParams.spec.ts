@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import { env } from "../../config/env";
 import { Logger } from "../../utils/Logger";
 import { ApiClient } from "../../utils/ApiClient";
 
@@ -17,7 +16,8 @@ test.describe("Path and Query parameters API", () => {
   });
 
   test("Verify GET user using query parameter", async ({ request }) => {
-    const response = await request.get(`${env.apiUrl}/posts`, {
+    const apiClient = new ApiClient(request);
+    const response = await apiClient.get(`/posts`, {
       params: {
         userId: 1,
       },
