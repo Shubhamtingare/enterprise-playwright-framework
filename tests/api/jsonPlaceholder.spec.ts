@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
 import { env } from "../../config/env";
+import { ApiClient } from "../../utils/ApiClient";
+import { expectStatus } from "../../utils/apiAssertions";
 
 test("Verify GET /users/1 returns valid user details", async ({ request }) => {
   const response = await request.get(`${env.apiUrl}/users/1`);
@@ -34,4 +36,17 @@ test("Verify user response structure", async ({ request }) => {
   expect(jsonData.address).toHaveProperty("city");
   expect(jsonData.company).toHaveProperty("name");
   expect(jsonData.address.geo).toHaveProperty("lat");
+});
+
+test.describe("Negative scenarios", () => {
+  test("Verify GET returns 404 for non-existing user", async ({ request }) => {
+    const apiClient = new ApiClient(request);
+    const response = await apiClient.get(`/users/99999`);
+    Logger.info(`response.status : ${response.status()}`);
+
+    const responseBody = await response.text();
+    Logger.info(`responseBody : ${responseBody}`);
+
+    expectStatus(response, 404);
+  });
 });
