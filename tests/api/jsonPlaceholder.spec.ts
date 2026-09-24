@@ -1,6 +1,5 @@
 import { test, expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
-import { env } from "../../config/env";
 import { ApiClient } from "../../utils/ApiClient";
 import { expectProperty, expectStatus } from "../../utils/apiAssertions";
 

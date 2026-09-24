@@ -2,6 +2,7 @@ import test, { expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
 import { env } from "../../config/env";
 import { ApiClient } from "../../utils/ApiClient";
+import { expectStatus } from "../../utils/apiAssertions";
 
 test.describe("Update API", () => {
   test("Verify PUT updates an existing post", async ({ request }) => {
@@ -17,7 +18,7 @@ test.describe("Update API", () => {
     const jsonData = await response.json();
     Logger.info(JSON.stringify(jsonData, null, 2));
 
-    expect(response.status()).toBe(200);
+    expectStatus(response, 200);
     expect(jsonData.title).toBe("Updated Playwright");
     expect(jsonData.body).toBe("Updated API Testing");
     expect(jsonData.userId).toBe(1);
@@ -33,7 +34,7 @@ test.describe("Update API", () => {
     const jsonData = await response.json();
     Logger.info(JSON.stringify(jsonData, null, 2));
 
-    expect(response.status()).toBe(200);
+    expectStatus(response, 200);
     expect(jsonData.title).toBe("Patched Playwright");
     expect(jsonData).toHaveProperty("id");
   });

@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
 import { ApiClient } from "../../utils/ApiClient";
+import { expectStatus } from "../../utils/apiAssertions";
 
 test.describe("Path and Query parameters API", () => {
   test("Verify GET user using path parameter", async ({ request }) => {
@@ -11,7 +12,7 @@ test.describe("Path and Query parameters API", () => {
 
     Logger.info(JSON.stringify(jsonData, null, 2));
 
-    expect(response.status()).toBe(200);
+    expectStatus(response, 200);
     expect(jsonData).toHaveProperty("name");
   });
 
@@ -27,7 +28,7 @@ test.describe("Path and Query parameters API", () => {
 
     Logger.info(JSON.stringify(jsonData, null, 2));
 
-    expect(response.status()).toBe(200);
+    expectStatus(response, 200);
     expect(jsonData).toBeInstanceOf(Array);
     expect(jsonData.length).toBeGreaterThan(0);
 

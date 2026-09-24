@@ -1,6 +1,7 @@
 import test, { expect } from "@playwright/test";
 import { Logger } from "../../utils/Logger";
 import { env } from "../../config/env";
+import { expectStatus } from "../../utils/apiAssertions";
 
 test("Verify GET request with custom headers", async ({ request }) => {
   const response = await request.get(`${env.apiUrl}/users/1`, {
@@ -15,6 +16,6 @@ test("Verify GET request with custom headers", async ({ request }) => {
   Logger.info(JSON.stringify(jsonData, null, 2));
   Logger.info(JSON.stringify(response.headers(), null, 2));
 
-  expect(response.status()).toBe(200);
+  expectStatus(response, 200);
   expect(jsonData.name).toBe("Leanne Graham");
 });

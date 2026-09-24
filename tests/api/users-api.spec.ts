@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { expectStatus } from "../../utils/apiAssertions";
 
 test("Get Users API", async ({ request }) => {
   const response = await request.get("https://reqres.in/api/users?page=2", {
@@ -7,5 +8,5 @@ test("Get Users API", async ({ request }) => {
     },
   });
 
-  expect(response.status()).toBe(200);
+  expectStatus(response, 200);
 });
