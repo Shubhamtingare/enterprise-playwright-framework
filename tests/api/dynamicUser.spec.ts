@@ -1,13 +1,12 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { createUserData } from "../../data/ApiTestData";
-import { ApiClient } from "../../utils/ApiClient";
 import { Logger } from "../../utils/Logger";
 import { expectStatus } from "../../utils/apiAssertions";
 
-test("Verify creating dynamic user", async ({ request }) => {
+test("Verify creating dynamic user", async ({ apiClient }) => {
   const userData = createUserData();
 
-  const apiClient = new ApiClient(request);
   const response = await apiClient.post("/users", userData);
 
   const jsonData = await response.json();

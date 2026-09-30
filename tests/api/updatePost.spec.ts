@@ -1,18 +1,18 @@
-import test, { expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
-import { env } from "../../config/env";
 import { ApiClient } from "../../utils/ApiClient";
 import { expectStatus } from "../../utils/apiAssertions";
 
 test.describe("Update API", () => {
-  test("Verify PUT updates an existing post", async ({ request }) => {
+  test("Verify PUT updates an existing post", async ({ apiClient }) => {
     const data = {
       id: 1,
       title: "Updated Playwright",
       body: "Updated API Testing",
       userId: 1,
     };
-    const apiClient = new ApiClient(request);
+
     const response = await apiClient.put("/posts/1", data);
 
     const jsonData = await response.json();
@@ -24,8 +24,7 @@ test.describe("Update API", () => {
     expect(jsonData.userId).toBe(1);
   });
 
-  test("Verify PATCH updates post title", async ({ request }) => {
-    const apiClient = new ApiClient(request);
+  test("Verify PATCH updates post title", async ({ apiClient }) => {
     const data = {
       title: "Patched Playwright",
     };

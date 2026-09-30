@@ -1,12 +1,11 @@
-import test, { expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { env } from "../../config/env";
 import { Logger } from "../../utils/Logger";
-import { ApiClient } from "../../utils/ApiClient";
 import { expectStatus } from "../../utils/apiAssertions";
 
 test.describe("Delete Posts API", () => {
-  test("Verify DELETE removes a post", async ({ request }) => {
-    const apiClient = new ApiClient(request);
+  test("Verify DELETE removes a post", async ({ apiClient }) => {
     const response = await apiClient.delete("/posts/1");
 
     const jsonData = await response.json();

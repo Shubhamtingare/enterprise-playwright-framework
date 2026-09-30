@@ -1,12 +1,10 @@
-import test, { expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
-import { ApiClient } from "../../utils/ApiClient";
 import { apiTestData } from "../../data/ApiTestData";
 import { expectStatus } from "../../utils/apiAssertions";
 
-test("Verify POST /posts creates a new post", async ({ request }) => {
-  const apiClient = new ApiClient(request);
-
+test("Verify POST /posts creates a new post", async ({ apiClient }) => {
   const response = await apiClient.post("/posts", apiTestData.createPost, {
     headers: {
       Accept: "application/json",

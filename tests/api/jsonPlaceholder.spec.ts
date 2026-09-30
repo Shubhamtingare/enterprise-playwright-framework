@@ -1,15 +1,13 @@
-import { test, expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
-import { ApiClient } from "../../utils/ApiClient";
 import { expectProperty, expectStatus } from "../../utils/apiAssertions";
 import { validateSchema } from "../../utils/schemaValidator";
 import { userSchema } from "../../schemas/userSchema";
 
 test.describe("Positive scenarios", () => {
   test("Verify GET /users/1 returns valid user details", async ({
-    request,
+    apiClient,
   }) => {
-    const apiClient = new ApiClient(request);
     const response = await apiClient.get(`/users/1`);
 
     expectStatus(response, 200);
@@ -17,18 +15,10 @@ test.describe("Positive scenarios", () => {
     const jsonData = await response.json();
     Logger.info(JSON.stringify(jsonData, null, 2));
 
-    // expect(jsonData.name).toBe("Leanne Graham");
-    // expect(jsonData.id).toBe(1);
-    // expect(jsonData.username).toBe("Bret");
-    // expect(jsonData.email).toBe("Sincere@april.biz");
-
     validateSchema(jsonData, userSchema);
-
-    expectStatus(response, 200);
   });
 
-  test("Verify user response structure", async ({ request }) => {
-    const apiClient = new ApiClient(request);
+  test("Verify user response structure", async ({ apiClient }) => {
     const response = await apiClient.get("/users/1");
 
     const jsonData = await response.json();
@@ -47,8 +37,9 @@ test.describe("Positive scenarios", () => {
 });
 
 test.describe("Negative scenarios", () => {
-  test("Verify GET returns 404 for non-existing user", async ({ request }) => {
-    const apiClient = new ApiClient(request);
+  test("Verify GET returns 404 for non-existing user", async ({
+    apiClient,
+  }) => {
     const response = await apiClient.get("/users/99999");
     Logger.info(`response.status : ${response.status()}`);
 

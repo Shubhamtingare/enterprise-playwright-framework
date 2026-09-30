@@ -1,11 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
 import { ApiClient } from "../../utils/ApiClient";
 import { expectStatus } from "../../utils/apiAssertions";
 
 test.describe("Path and Query parameters API", () => {
-  test("Verify GET user using path parameter", async ({ request }) => {
-    const apiClient = new ApiClient(request);
+  test("Verify GET user using path parameter", async ({ apiClient }) => {
     const response = await apiClient.get("/users/1");
 
     const jsonData = await response.json();
@@ -16,8 +16,7 @@ test.describe("Path and Query parameters API", () => {
     expect(jsonData).toHaveProperty("name");
   });
 
-  test("Verify GET user using query parameter", async ({ request }) => {
-    const apiClient = new ApiClient(request);
+  test("Verify GET user using query parameter", async ({ apiClient }) => {
     const response = await apiClient.get(`/posts`, {
       params: {
         userId: 1,
