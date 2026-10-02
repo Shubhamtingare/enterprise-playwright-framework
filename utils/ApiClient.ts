@@ -8,10 +8,16 @@ type RequestOptions = {
 };
 
 export class ApiClient {
-  constructor(private request: APIRequestContext) {}
+  constructor(
+    private request: APIRequestContext,
+    private defaultOptions?: RequestOptions,
+  ) {}
 
   async get(endpoint: string, options?: RequestOptions) {
-    return this.request.get(`${env.apiUrl}${endpoint}`, options);
+    return this.request.get(`${env.apiUrl}${endpoint}`, {
+      ...this.defaultOptions,
+      ...options,
+    });
   }
 
   async post(
@@ -19,7 +25,10 @@ export class ApiClient {
     data: Record<string, unknown>,
     options?: RequestOptions,
   ) {
-    return this.request.post(`${env.apiUrl}${endpoint}`, { data, ...options });
+    return this.request.post(`${env.apiUrl}${endpoint}`, {
+      ...this.defaultOptions,
+      ...options,
+    });
   }
 
   async put(
@@ -27,7 +36,10 @@ export class ApiClient {
     data: Record<string, unknown>,
     options?: RequestOptions,
   ) {
-    return this.request.put(`${env.apiUrl}${endpoint}`, { data, ...options });
+    return this.request.put(`${env.apiUrl}${endpoint}`, {
+      ...this.defaultOptions,
+      ...options,
+    });
   }
 
   async patch(
@@ -35,10 +47,16 @@ export class ApiClient {
     data: Record<string, unknown>,
     options?: RequestOptions,
   ) {
-    return this.request.patch(`${env.apiUrl}${endpoint}`, { data, ...options });
+    return this.request.patch(`${env.apiUrl}${endpoint}`, {
+      ...this.defaultOptions,
+      ...options,
+    });
   }
 
   async delete(endpoint: string, options?: RequestOptions) {
-    return this.request.delete(`${env.apiUrl}${endpoint}`, options);
+    return this.request.delete(`${env.apiUrl}${endpoint}`, {
+      ...this.defaultOptions,
+      ...options,
+    });
   }
 }

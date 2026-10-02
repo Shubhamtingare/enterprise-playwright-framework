@@ -1,7 +1,6 @@
 import { expect } from "@playwright/test";
 import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
-import { ApiClient } from "../../utils/ApiClient";
 import { expectStatus } from "../../utils/apiAssertions";
 
 test.describe("Path and Query parameters API", () => {
