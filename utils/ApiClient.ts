@@ -17,6 +17,10 @@ export class ApiClient {
     return this.request.get(`${env.apiUrl}${endpoint}`, {
       ...this.defaultOptions,
       ...options,
+      headers: {
+        ...this.defaultOptions?.headers,
+        ...options?.headers,
+      },
     });
   }
 
@@ -26,8 +30,13 @@ export class ApiClient {
     options?: RequestOptions,
   ) {
     return this.request.post(`${env.apiUrl}${endpoint}`, {
+      data,
       ...this.defaultOptions,
       ...options,
+      headers: {
+        ...this.defaultOptions?.headers,
+        ...options?.headers,
+      },
     });
   }
 
@@ -37,8 +46,13 @@ export class ApiClient {
     options?: RequestOptions,
   ) {
     return this.request.put(`${env.apiUrl}${endpoint}`, {
+      data,
       ...this.defaultOptions,
       ...options,
+      headers: {
+        ...this.defaultOptions?.headers,
+        ...options?.headers,
+      },
     });
   }
 
@@ -48,8 +62,13 @@ export class ApiClient {
     options?: RequestOptions,
   ) {
     return this.request.patch(`${env.apiUrl}${endpoint}`, {
+      data,
       ...this.defaultOptions,
       ...options,
+      headers: {
+        ...this.defaultOptions?.headers,
+        ...options?.headers,
+      },
     });
   }
 
@@ -57,6 +76,10 @@ export class ApiClient {
     return this.request.delete(`${env.apiUrl}${endpoint}`, {
       ...this.defaultOptions,
       ...options,
+      headers: {
+        ...this.defaultOptions?.headers,
+        ...options?.headers,
+      },
     });
   }
 }
