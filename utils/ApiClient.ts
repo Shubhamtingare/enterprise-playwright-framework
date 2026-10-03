@@ -13,15 +13,22 @@ export class ApiClient {
     private defaultOptions?: RequestOptions,
   ) {}
 
-  async get(endpoint: string, options?: RequestOptions) {
-    return this.request.get(`${env.apiUrl}${endpoint}`, {
+  private buildRequestOptions(options?: RequestOptions): RequestOptions {
+    return {
       ...this.defaultOptions,
       ...options,
       headers: {
         ...this.defaultOptions?.headers,
         ...options?.headers,
       },
-    });
+    };
+  }
+
+  async get(endpoint: string, options?: RequestOptions) {
+    return this.request.get(
+      `${env.apiUrl}${endpoint}`,
+      this.buildRequestOptions(options),
+    );
   }
 
   async post(
@@ -31,12 +38,7 @@ export class ApiClient {
   ) {
     return this.request.post(`${env.apiUrl}${endpoint}`, {
       data,
-      ...this.defaultOptions,
-      ...options,
-      headers: {
-        ...this.defaultOptions?.headers,
-        ...options?.headers,
-      },
+      ...this.buildRequestOptions(options),
     });
   }
 
@@ -47,12 +49,7 @@ export class ApiClient {
   ) {
     return this.request.put(`${env.apiUrl}${endpoint}`, {
       data,
-      ...this.defaultOptions,
-      ...options,
-      headers: {
-        ...this.defaultOptions?.headers,
-        ...options?.headers,
-      },
+      ...this.buildRequestOptions(options),
     });
   }
 
@@ -63,23 +60,13 @@ export class ApiClient {
   ) {
     return this.request.patch(`${env.apiUrl}${endpoint}`, {
       data,
-      ...this.defaultOptions,
-      ...options,
-      headers: {
-        ...this.defaultOptions?.headers,
-        ...options?.headers,
-      },
+      ...this.buildRequestOptions(options),
     });
   }
 
   async delete(endpoint: string, options?: RequestOptions) {
     return this.request.delete(`${env.apiUrl}${endpoint}`, {
-      ...this.defaultOptions,
-      ...options,
-      headers: {
-        ...this.defaultOptions?.headers,
-        ...options?.headers,
-      },
+      ...this.buildRequestOptions(options),
     });
   }
 }
