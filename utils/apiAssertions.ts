@@ -1,6 +1,7 @@
-import { APIResponse, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
+import { ApiResponse } from "./ApiResponse";
 
-export function expectStatus(response: APIResponse, expectedStatus: number) {
+export function expectStatus(response: ApiResponse, expectedStatus: number) {
   expect(response.status()).toBe(expectedStatus);
 }
 

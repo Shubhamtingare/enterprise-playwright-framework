@@ -1,5 +1,6 @@
 import { APIRequestContext } from "@playwright/test";
 import { env } from "../config/env";
+import { ApiResponse } from "./ApiResponse";
 
 type RequestOptions = {
   headers?: Record<string, string>;
@@ -25,10 +26,11 @@ export class ApiClient {
   }
 
   async get(endpoint: string, options?: RequestOptions) {
-    return this.request.get(
+    const response = await this.request.get(
       `${env.apiUrl}${endpoint}`,
       this.buildRequestOptions(options),
     );
+    return new ApiResponse(response);
   }
 
   async post(
@@ -36,10 +38,11 @@ export class ApiClient {
     data: Record<string, unknown>,
     options?: RequestOptions,
   ) {
-    return this.request.post(`${env.apiUrl}${endpoint}`, {
+    const response = await this.request.post(`${env.apiUrl}${endpoint}`, {
       data,
       ...this.buildRequestOptions(options),
     });
+    return new ApiResponse(response);
   }
 
   async put(
@@ -47,10 +50,12 @@ export class ApiClient {
     data: Record<string, unknown>,
     options?: RequestOptions,
   ) {
-    return this.request.put(`${env.apiUrl}${endpoint}`, {
+    const response = await this.request.put(`${env.apiUrl}${endpoint}`, {
       data,
       ...this.buildRequestOptions(options),
     });
+
+    return new ApiResponse(response);
   }
 
   async patch(
@@ -58,15 +63,19 @@ export class ApiClient {
     data: Record<string, unknown>,
     options?: RequestOptions,
   ) {
-    return this.request.patch(`${env.apiUrl}${endpoint}`, {
+    const response = await this.request.patch(`${env.apiUrl}${endpoint}`, {
       data,
       ...this.buildRequestOptions(options),
     });
+
+    return new ApiResponse(response);
   }
 
   async delete(endpoint: string, options?: RequestOptions) {
-    return this.request.delete(`${env.apiUrl}${endpoint}`, {
+    const response = await this.request.delete(`${env.apiUrl}${endpoint}`, {
       ...this.buildRequestOptions(options),
     });
+
+    return new ApiResponse(response);
   }
 }

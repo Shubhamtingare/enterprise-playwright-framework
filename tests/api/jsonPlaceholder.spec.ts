@@ -9,6 +9,7 @@ test.describe("Positive scenarios", () => {
     apiClient,
   }) => {
     const response = await apiClient.get(`/users/1`);
+    // const response = new ApiResponse(rawResponse);
 
     expectStatus(response, 200);
 
