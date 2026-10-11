@@ -1,6 +1,7 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import { env } from "../config/env";
 import { ApiResponse } from "./ApiResponse";
+import { Logger } from "./Logger";
 
 type RequestOptions = {
   headers?: Record<string, string>;
@@ -30,8 +31,10 @@ export class ApiClient {
     url: string,
     requestFn: () => Promise<APIResponse>,
   ) {
+    Logger.info(`API Request ${method} ${url}`);
     try {
       const response = await requestFn();
+      Logger.info(`Http Response Status : ${response.status()}`);
       return new ApiResponse(response);
     } catch (error) {
       throw new Error(`API Request failed:${method} ${url} \n ${error}`);

@@ -14,4 +14,5 @@ export const env = {
   password: process.env.APP_PASSWORD,
   apiUrl: process.env.API_URL,
   apiToken: process.env.API_TOKEN!,
+  logLevel: process.env.LOG_Level || "INFO",
 };
