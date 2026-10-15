@@ -1,10 +1,9 @@
-import test, { expect } from "@playwright/test";
+import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
-import { env } from "../../config/env";
-import { expectStatus } from "../../utils/apiAssertions";
+import { expectPropertyValue, expectStatus } from "../../utils/apiAssertions";
 
-test("Verify GET request with custom headers", async ({ request }) => {
-  const response = await request.get(`${env.apiUrl}/users/1`, {
+test("Verify GET request with custom headers", async ({ apiClient }) => {
+  const response = await apiClient.get(`/users/1`, {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -17,5 +16,5 @@ test("Verify GET request with custom headers", async ({ request }) => {
   Logger.info(JSON.stringify(response.headers(), null, 2));
 
   expectStatus(response, 200);
-  expect(jsonData.name).toBe("Leanne Graham");
+  expectPropertyValue(jsonData, "name", "Leanne Graham");
 });

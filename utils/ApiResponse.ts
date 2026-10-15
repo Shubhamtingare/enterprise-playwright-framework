@@ -7,6 +7,10 @@ export class ApiResponse {
     return this.response.status();
   }
 
+  headers(): Record<string, string> {
+    return this.response.headers();
+  }
+
   async json(): Promise<object> {
     return this.response.json();
   }

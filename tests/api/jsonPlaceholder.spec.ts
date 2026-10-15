@@ -1,6 +1,10 @@
 import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
-import { expectProperty, expectStatus } from "../../utils/apiAssertions";
+import {
+  expectProperty,
+  expectPropertyValue,
+  expectStatus,
+} from "../../utils/apiAssertions";
 import { validateSchema } from "../../utils/schemaValidator";
 import { userSchema } from "../../schemas/userSchema";
 
@@ -12,12 +16,16 @@ test.describe("Positive scenarios", () => {
     },
     async ({ apiClient }) => {
       const response = await apiClient.get(`/users/1`);
-      // const response = new ApiResponse(rawResponse);
 
       expectStatus(response, 200);
 
       const jsonData = await response.json();
       Logger.info(JSON.stringify(jsonData, null, 2));
+
+      expectPropertyValue(jsonData, "id", 1);
+      expectPropertyValue(jsonData, "name", "Leanne Graham");
+      expectPropertyValue(jsonData, "username", "Bret");
+      expectPropertyValue(jsonData, "email", "Sincere@april.biz");
 
       validateSchema(jsonData, userSchema);
     },

@@ -8,3 +8,13 @@ export function expectStatus(response: ApiResponse, expectedStatus: number) {
 export function expectProperty(responseBody: object, property: string) {
   expect(responseBody).toHaveProperty(property);
 }
+
+export function expectPropertyValue(
+  responseBody: object,
+  property: string,
+  propertyValue: unknown,
+) {
+  expect((responseBody as Record<string, unknown>)[property]).toBe(
+    propertyValue,
+  );
+}
