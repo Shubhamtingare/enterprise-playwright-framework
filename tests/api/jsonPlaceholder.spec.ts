@@ -1,6 +1,7 @@
 import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
 import {
+  expectPropertType,
   expectProperty,
   expectPropertyValue,
   expectStatus,
@@ -26,6 +27,9 @@ test.describe("Positive scenarios", () => {
       expectPropertyValue(jsonData, "name", "Leanne Graham");
       expectPropertyValue(jsonData, "username", "Bret");
       expectPropertyValue(jsonData, "email", "Sincere@april.biz");
+      expectPropertyType(jsonData, "id", "number");
+      expectPropertyType(jsonData, "name", "string");
+      expectPropertyType(jsonData, "email", "string");
 
       validateSchema(jsonData, userSchema);
     },

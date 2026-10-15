@@ -18,3 +18,13 @@ export function expectPropertyValue(
     propertyValue,
   );
 }
+
+export function expectPropertyType(
+  responseBody: object,
+  property: string,
+  propertyType: string,
+) {
+  expect(typeof (responseBody as Record<string, unknown>)[property]).toBe(
+    propertyType,
+  );
+}
