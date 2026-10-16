@@ -1,7 +1,7 @@
 import { test } from "../../fixtures/apiFixture";
 import { Logger } from "../../utils/Logger";
 import {
-  expectPropertType,
+  expectPropertyType,
   expectProperty,
   expectPropertyValue,
   expectStatus,
@@ -52,9 +52,9 @@ test.describe("Positive scenarios", () => {
       expectProperty(jsonData, "username");
       expectProperty(jsonData, "address");
       expectProperty(jsonData, "company");
-      expectProperty(jsonData.address, "city");
-      expectProperty(jsonData.company, "name");
-      expectProperty(jsonData.address.geo, "lat");
+      expectProperty(jsonData, "address.city");
+      expectProperty(jsonData, "company.name");
+      expectProperty(jsonData, "address.geo.lat");
     },
   );
 });
