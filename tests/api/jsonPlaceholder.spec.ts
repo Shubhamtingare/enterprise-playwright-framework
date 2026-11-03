@@ -5,15 +5,17 @@ import {
   expectProperty,
   expectPropertyValue,
   expectStatus,
+  expectErrorBody,
 } from "../../utils/apiAssertions";
 import { validateSchema } from "../../utils/schemaValidator";
 import { userSchema } from "../../schemas/userSchema";
+import { expect } from "@playwright/test";
 
 test.describe("Positive scenarios", () => {
   test(
     "Verify GET /users/1 returns valid user details",
     {
-      tag: ["@regression", "@smoke"],
+      // tag: ["@regression", "@smoke"],
     },
     async ({ apiClient }) => {
       const response = await apiClient.get(`/users/1`);
@@ -38,7 +40,7 @@ test.describe("Positive scenarios", () => {
   test(
     "Verify user response structure",
     {
-      tag: "@regression",
+      // tag: "@regression",
     },
     async ({ apiClient }) => {
       const response = await apiClient.get("/users/1");
@@ -70,8 +72,24 @@ test.describe("Negative scenarios", () => {
       Logger.info(`response.status : ${response.status()}`);
 
       expectStatus(response, 404);
-      const responseBody = await response.text();
-      Logger.info(`responseBody : ${responseBody}`);
+      const jsonData = await response.json();
+      expectErrorBody(jsonData);
     },
   );
+
+  test("/posts", async ({ apiClient }) => {
+    const response = await apiClient.post("/posts", {
+      title: "Playwright",
+      body: "Learning API Testing",
+      userId: "1",
+    });
+
+    expectStatus(response, 201);
+
+    const responseBody = await response.json();
+
+    expectPropertyValue(responseBody, "title", "Playwright");
+    expectPropertyValue(responseBody, "userId", "1");
+    expectProperty(responseBody, "id");
+  });
 });

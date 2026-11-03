@@ -28,3 +28,7 @@ export function expectPropertyType(
     propertyType,
   );
 }
+
+export function expectErrorBody(responseBody: object) {
+  expect(responseBody).toEqual({});
+}
