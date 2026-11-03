@@ -6,10 +6,11 @@ import {
   expectPropertyValue,
   expectStatus,
   expectErrorBody,
+  expectResponseTime,
 } from "../../utils/apiAssertions";
 import { validateSchema } from "../../utils/schemaValidator";
 import { userSchema } from "../../schemas/userSchema";
-import { expect } from "@playwright/test";
+import { performanceConfig } from "../../config/performanceConfig";
 
 test.describe("Positive scenarios", () => {
   test(
@@ -91,5 +92,22 @@ test.describe("Negative scenarios", () => {
     expectPropertyValue(responseBody, "title", "Playwright");
     expectPropertyValue(responseBody, "userId", "1");
     expectProperty(responseBody, "id");
+  });
+});
+
+test.describe("API Response time validation tests", () => {
+  test("Validate API response time", async ({ apiClient }) => {
+    const startTime = performance.now();
+    const response = await apiClient.get("/users/1");
+    const endTime = performance.now();
+    const responseTime = endTime - startTime;
+
+    expectStatus(response, 200);
+    Logger.info(`API Response Time: ${responseTime.toFixed(2)} ms`);
+    expectResponseTime(
+      responseTime,
+      performanceConfig.maxApiResponseTime,
+      "GET /users/1",
+    );
   });
 });

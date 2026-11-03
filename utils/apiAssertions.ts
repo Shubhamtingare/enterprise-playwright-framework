@@ -32,3 +32,16 @@ export function expectPropertyType(
 export function expectErrorBody(responseBody: object) {
   expect(responseBody).toEqual({});
 }
+
+export function expectResponseTime(
+  responseTime: number,
+  maxTime: number,
+  apiName: string,
+) {
+  expect(
+    responseTime,
+    `${apiName} exceeded the maximum response time.
+     Expected: <= ${maxTime} ms
+     Actual: ${responseTime.toFixed(2)} ms`,
+  ).toBeLessThanOrEqual(maxTime);
+}
