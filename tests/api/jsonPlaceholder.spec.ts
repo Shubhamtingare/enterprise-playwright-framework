@@ -7,10 +7,13 @@ import {
   expectStatus,
   expectErrorBody,
   expectResponseTime,
+  expectHeader,
+  expectHeaderExists,
 } from "../../utils/apiAssertions";
 import { validateSchema } from "../../utils/schemaValidator";
 import { userSchema } from "../../schemas/userSchema";
 import { performanceConfig } from "../../config/performanceConfig";
+import { ApiResponse } from "../../utils/ApiResponse";
 
 test.describe("Positive scenarios", () => {
   test(
@@ -60,6 +63,22 @@ test.describe("Positive scenarios", () => {
       expectProperty(jsonData, "address.geo.lat");
     },
   );
+
+  test("Verify response headers", async ({ apiClient }) => {
+    const response = await apiClient.get("/users/1");
+
+    const headers = response.headers();
+
+    expectStatus(response, 200);
+    expectHeaderExists(headers, "content-type");
+    expectHeaderExists(headers, "cache-control");
+    expectHeader(headers, "content-type", "application/json; charset=utf-8");
+
+    Logger.info(`Response headers : ${JSON.stringify(headers, null, 2)}`);
+    Logger.info(
+      `Content-Type : ${JSON.stringify(headers["content-type"], null, 2)}`,
+    );
+  });
 });
 
 test.describe("Negative scenarios", () => {
@@ -93,6 +112,14 @@ test.describe("Negative scenarios", () => {
     expectPropertyValue(responseBody, "userId", "1");
     expectProperty(responseBody, "id");
   });
+
+  //It should be fail--
+  // test("Verify missing response header", async ({ apiClient }) => {
+  //   const response = await apiClient.get("/users/1");
+  //   const headers = response.headers();
+
+  //   expectHeaderExists(headers, "invalid-header");
+  // });
 });
 
 test.describe("API Response time validation tests", () => {

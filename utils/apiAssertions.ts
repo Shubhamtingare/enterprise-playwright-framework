@@ -45,3 +45,16 @@ export function expectResponseTime(
      Actual: ${responseTime.toFixed(2)} ms`,
   ).toBeLessThanOrEqual(maxTime);
 }
+
+export function expectHeader(
+  headers: object,
+  headerName: string,
+  expectedValue: string,
+) {
+  const actualValue = (headers as Record<string, string>)[headerName];
+  expect(actualValue).toBe(expectedValue);
+}
+
+export function expectHeaderExists(headers: object, headerName: string) {
+  expect(headers).toHaveProperty(headerName);
+}
